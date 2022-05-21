@@ -73,5 +73,24 @@ span {
 }
 
 @media screen and (max-width: 1080px){
-    
+    main {
+        margin: 200px 0;
+    }
+    .card {
+        width: 94vw;
+    }
+    p {
+        text-align: right;
+        margin: 0 40px 0 0;
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 634px){
+    main {
+        margin: 0;
+    }
+    .card{
+        padding-bottom: 60px;
+    }
 }
