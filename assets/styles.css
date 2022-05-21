@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+    font-family: 'Hind Siliguri', sans-serif;
+}
+
+main {
+    margin: 200px;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    font-size: 1.5rem;
+}
+
+h1 {
+    margin-bottom: 40px;
+    font-weight: 700;
+    font-size: 2.2rem;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+p {
+    text-align: right;
+    margin: 40px 40px 0 0;
+    font-size: 2rem;
+}
+
+
+
+.card {
+    border-radius: 40px;
+    background-color: yellow;
+    position: relative;
+    margin: 0 auto;
+    height: 400px;
+    width: 640px;
+    padding: 40px 20px 10px;
+}
+
