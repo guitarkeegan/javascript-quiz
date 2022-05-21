@@ -22,7 +22,7 @@ main {
 ul {
     list-style: none;
     font-size: 2.2rem;
-    color: red;
+    color: var(--bg);
 }
 
 h1 {
@@ -39,7 +39,7 @@ h2 {
 
 p {
     text-align: right;
-    margin: 40px 40px 0 0;
+    margin: 0 40px 20px 0;
     font-size: 2rem;
     
 }
@@ -49,13 +49,24 @@ span {
     font-size: 1.5rem;
 }
 
+.start-button {
+    height: 100px;
+    width: 200px;
+    font-size: 2rem;
+    border-radius: 40px;
+    box-shadow: 3px 3px 5px;
+    background-color: var(--cc);
+}
 
+.start-button:hover {
+    background-color: #38FFAF;
+}
 
 .card {
     border-radius: 40px;
     background-color: var(--cc);
     position: relative;
-    margin: 0 auto;
+    margin: 0 auto 20px;
     height: 400px;
     width: 640px;
     padding: 40px 20px 10px;
