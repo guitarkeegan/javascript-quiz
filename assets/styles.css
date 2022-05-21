@@ -73,6 +73,18 @@ span {
     border: 5px solid black;
 }
 
+#question-card {
+    border-radius: 40px;
+    background-color: var(--cc);
+    position: relative;
+    margin: 0 auto 20px;
+    height: 400px;
+    width: 640px;
+    padding: 40px 20px 10px;
+    border: 5px solid black;
+    display: none;
+}
+
 @media screen and (max-width: 1080px){
     main {
         margin: 200px 0;
