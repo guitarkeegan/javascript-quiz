@@ -62,7 +62,7 @@ span {
     background-color: #38FFAF;
 }
 
-.card {
+#start-card {
     border-radius: 40px;
     background-color: var(--cc);
     position: relative;
@@ -77,7 +77,7 @@ span {
     main {
         margin: 200px 0;
     }
-    .card {
+    #start-card {
         width: 80vw;
     }
     p {
@@ -91,7 +91,7 @@ span {
     main {
         margin: 80px 0 0 0;
     }
-    .card {
+    #start-card {
         padding-bottom: 60px;
 }
 }
