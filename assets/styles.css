@@ -85,6 +85,13 @@ span {
     display: none;
 }
 
+ol {
+    text-align: left;
+    word-wrap: normal;
+    font-size: 1.2rem;
+    color: black;
+}
+
 @media screen and (max-width: 1080px){
     main {
         margin: 200px 0;
