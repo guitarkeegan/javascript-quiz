@@ -92,11 +92,18 @@ ol {
     color: black;
 }
 
+ol li {
+    border: 2px solid var(--bg);
+    margin: 5px 0;
+    border-radius: 40px;
+    padding-left: 3px;
+}
+
 @media screen and (max-width: 1080px){
     main {
         margin: 200px 0;
     }
-    #start-card {
+    #start-card, #question-card {
         width: 80vw;
     }
     p {
@@ -110,7 +117,7 @@ ol {
     main {
         margin: 80px 0 0 0;
     }
-    #start-card {
+    #start-card, #question-card {
         padding-bottom: 60px;
 }
 }

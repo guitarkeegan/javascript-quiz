@@ -5,7 +5,7 @@ document.getElementById("start-button").addEventListener("click", function(){
     document.getElementById("question-card").style.setProperty("display", "block");
 });
     
-    // document.getElementById("start-card").style({display: none});
+
 
 
 
