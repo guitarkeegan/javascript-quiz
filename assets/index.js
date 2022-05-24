@@ -71,12 +71,16 @@ const questions = [
         Ans: 'B'}
     ]
 
-
+// event handlers
 document.getElementById("start-button").addEventListener("click", function(){
     document.getElementById("start-card").style.setProperty("display", "none");
     document.getElementById("start-button").style.setProperty("display", "none");
     document.getElementById("question-card").style.setProperty("display", "block");
     startGame();
+});
+
+document.getElementById("answer1").addEventListener("click", () => {
+    checkAnswer();
 });
 
 
@@ -115,6 +119,10 @@ function gameTimer(){
         }
     }, 1000);
 }
+
 // TODO: check answer function
+function checkAnswer(chosenAnswer) {
+    console.log(chosenAnswer);
+}
 // TODO: give user feedback on answer
 // TODO: call next function
