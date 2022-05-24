@@ -1,19 +1,11 @@
-document.getElementById("start-button").addEventListener("click", function(){
-    console.log("I've been clicked!");
-    document.getElementById("start-card").style.setProperty("display", "none");
-    document.getElementById("start-button").style.setProperty("display", "none");
-    document.getElementById("question-card").style.setProperty("display", "block");
-});
-
-
-console.log(questions[0]);
+// quiz questions
 
 const questions = [
     {
         question: 'When a user views a page containing a JavaScript program, which machine actually executes the script?',
-        A: 'The User’s machine running a Web browser',
+        A: "The User’s machine running a Web browser",
         B: 'The Web server',
-        C: 'A central machine deep within Netscape’s corporate offices',
+        C: "A central machine deep within Netscape’s corporate offices",
         D: 'None of the above',
         Ans: 'A'
     },
@@ -78,3 +70,51 @@ const questions = [
         D: 'None of the above',
         Ans: 'B'}
     ]
+
+
+document.getElementById("start-button").addEventListener("click", function(){
+    document.getElementById("start-card").style.setProperty("display", "none");
+    document.getElementById("start-button").style.setProperty("display", "none");
+    document.getElementById("question-card").style.setProperty("display", "block");
+    startGame();
+});
+
+
+// TODO: start game function
+function startGame(){
+    gameTimer();
+    displayedQuestion = questions[Math.floor(Math.random() * questions.length)];
+    document.getElementById("question").innerHTML = displayedQuestion.question;
+    document.getElementById("answer1").innerHTML = displayedQuestion.A;
+    document.getElementById("answer2").innerHTML = displayedQuestion.B;
+    document.getElementById("answer3").innerHTML = displayedQuestion.C;
+    document.getElementById("answer4").innerHTML = displayedQuestion.D;
+}
+// TODO: create timer
+function gameTimer(){
+    let totalSec = 120;
+    let secCounter = 11;
+    let min = Math.ceil(60 / totalSec);
+    let zeroPad = "";
+    let timer = setInterval(function(){
+        document.getElementById('timer').innerHTML = min+":"+zeroPad+secCounter;
+        if (secCounter < 11 && secCounter > 0){
+            zeroPad = "0";
+            secCounter -= 1;
+        } else if (secCounter > 1){
+            secCounter -= 1;
+        } else if (secCounter <= 0 && min >= 1){
+            secCounter = 59;
+            min -= 1;
+            zeroPad = ""
+        } else if (secCounter <= 0 && min < 1) {
+            clearInterval(timer);
+            document.getElementById("timer").innerHTML = "Time is up!";
+        } else {
+            document.getElementById("timer").innerHTML = "Something has gone terribly wrong!"; 
+        }
+    }, 1000);
+}
+// TODO: check answer function
+// TODO: give user feedback on answer
+// TODO: call next function
