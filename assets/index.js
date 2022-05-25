@@ -1,6 +1,9 @@
 // quiz questions
 var chosenAnswer = "";
 var correctAnswer = "";
+let answeredCorrectly = 0;
+let answeredIncorrectly = 0;
+
 const questions = [
     {
         question: 'When a user views a page containing a JavaScript program, which machine actually executes the script?',
@@ -101,7 +104,6 @@ for (let i=0;i<numberOfAnswerButtons; i++){
             console.log("this did not work!");
     }
     document.querySelectorAll(".answer-button")[i].addEventListener("click", ()=>{
-        // TODO: USE THIS TO CHECK THE ANSWER
         checkAnswer(this.displayedQuestion[answerLetter]);
     });
 }
@@ -130,7 +132,8 @@ function gameTimer(){
             zeroPad = ""
         } else if (secCounter <= 0 && min < 1) {
             clearInterval(timer);
-            document.getElementById("timer").innerHTML = "Time is up!";
+            document.getElementById("timer").innerHTML = "00:00";
+            endGame();
         } else {
             document.getElementById("timer").innerHTML = "Something has gone terribly wrong!"; 
         }
@@ -143,10 +146,12 @@ function checkAnswer(chosenAnswer) {
     console.log(correctAnswer);
     if (chosenAnswer === correctAnswer){
         console.log("correct!");
+        answeredCorrectly += 1;
         feedbackIsCorrect();
         nextQuestion();
     } else {
         console.log("sorry! No dice.");
+        answeredIncorrectly += 1;
         nextQuestion();
     }
 }
@@ -170,6 +175,10 @@ function nextQuestion(){
     correctAnswer = displayedQuestion[displayedQuestion.Ans];
 }
 
-// TODO: Track correct and incorrect answers
-// TODO: Store correct and incorrect answers
 // TODO: End of game function
+function endGame(){
+    document.getElementById("start-card").style.setProperty("display", "block");
+    document.getElementById("start-button").style.setProperty("display", "block");
+    document.getElementById("question-card").style.setProperty("display", "none");
+}
+// TODO: Reset Game
