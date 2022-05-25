@@ -3,6 +3,7 @@ var chosenAnswer = "";
 var correctAnswer = "";
 let answeredCorrectly = 0;
 let answeredIncorrectly = 0;
+let userInitials = []
 
 const questions = [
     {
@@ -177,6 +178,8 @@ function nextQuestion(){
 
 // TODO: End of game function
 function endGame(){
+    currentUserInitials = prompt("Enter your initials to see how your rank!");
+    userInitials.push(currentUserInitials);
     document.getElementById("start-card").style.setProperty("display", "block");
     document.getElementById("start-button").style.setProperty("display", "block");
     document.getElementById("question-card").style.setProperty("display", "none");
