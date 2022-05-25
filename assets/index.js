@@ -79,10 +79,30 @@ document.getElementById("start-button").addEventListener("click", function(){
     startGame();
 });
 
-document.getElementById("answer1").addEventListener("click", () => {
-    checkAnswer();
-});
+const numberOfAnswerButtons = document.querySelectorAll(".answer-button").length
 
+for (let i=0;i<numberOfAnswerButtons; i++){
+    let answerLetter = "";
+    switch (i) {
+        case 0:
+            answerLetter = "A";
+            break;
+        case 1:
+            answerLetter = "B";
+            break;
+        case 2:
+            answerLetter = "C";
+            break;
+        case 3:
+            answerLetter = "D";
+            break;
+        default:
+            console.log("this did not work!");
+    }
+    document.querySelectorAll(".answer-button")[i].addEventListener("click", ()=>{
+        console.log(this.displayedQuestion[answerLetter]);
+    });
+}
 
 // TODO: start game function
 function startGame(){
@@ -97,7 +117,7 @@ function startGame(){
 // TODO: create timer
 function gameTimer(){
     let totalSec = 120;
-    let secCounter = 11;
+    let secCounter = 59;
     let min = Math.ceil(60 / totalSec);
     let zeroPad = "";
     let timer = setInterval(function(){
