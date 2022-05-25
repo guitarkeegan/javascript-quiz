@@ -105,6 +105,18 @@ ol li:hover {
     border-color: var(--highlight);
 }
 
+#question-card.correct {
+    background-color:blanchedalmond;
+
+}
+#question-card.correct::after {
+    content: "Correct!";
+    font-size: 80px;
+    color: var(--highlight);
+    font-weight: 900;
+    
+}
+
 @media screen and (max-width: 1080px){
     main {
         margin: 200px 0;

@@ -1,5 +1,6 @@
 // quiz questions
-
+var chosenAnswer = "";
+var correctAnswer = "";
 const questions = [
     {
         question: 'When a user views a page containing a JavaScript program, which machine actually executes the script?',
@@ -100,19 +101,15 @@ for (let i=0;i<numberOfAnswerButtons; i++){
             console.log("this did not work!");
     }
     document.querySelectorAll(".answer-button")[i].addEventListener("click", ()=>{
-        console.log(this.displayedQuestion[answerLetter]);
+        // TODO: USE THIS TO CHECK THE ANSWER
+        checkAnswer(this.displayedQuestion[answerLetter]);
     });
 }
 
 // TODO: start game function
 function startGame(){
     gameTimer();
-    displayedQuestion = questions[Math.floor(Math.random() * questions.length)];
-    document.getElementById("question").innerHTML = displayedQuestion.question;
-    document.getElementById("answer1").innerHTML = displayedQuestion.A;
-    document.getElementById("answer2").innerHTML = displayedQuestion.B;
-    document.getElementById("answer3").innerHTML = displayedQuestion.C;
-    document.getElementById("answer4").innerHTML = displayedQuestion.D;
+    nextQuestion();
 }
 // TODO: create timer
 function gameTimer(){
@@ -143,6 +140,36 @@ function gameTimer(){
 // TODO: check answer function
 function checkAnswer(chosenAnswer) {
     console.log(chosenAnswer);
+    console.log(correctAnswer);
+    if (chosenAnswer === correctAnswer){
+        console.log("correct!");
+        feedbackIsCorrect();
+        nextQuestion();
+    } else {
+        console.log("sorry! No dice.");
+        nextQuestion();
+    }
 }
 // TODO: give user feedback on answer
+function feedbackIsCorrect(){
+    const questionCard = document.getElementById("question-card");
+    console.log(questionCard)
+    questionCard.classList.add("correct");
+    setTimeout(()=>{
+        questionCard.classList.remove("correct");
+    }, 500);
+}
 // TODO: call next function
+function nextQuestion(){
+    displayedQuestion = questions[Math.floor(Math.random() * questions.length)];
+    document.getElementById("question").innerHTML = displayedQuestion.question;
+    document.getElementById("answer1").innerHTML = displayedQuestion.A;
+    document.getElementById("answer2").innerHTML = displayedQuestion.B;
+    document.getElementById("answer3").innerHTML = displayedQuestion.C;
+    document.getElementById("answer4").innerHTML = displayedQuestion.D;
+    correctAnswer = displayedQuestion[displayedQuestion.Ans];
+}
+
+// TODO: Track correct and incorrect answers
+// TODO: Store correct and incorrect answers
+// TODO: End of game function
