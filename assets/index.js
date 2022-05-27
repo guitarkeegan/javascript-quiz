@@ -4,6 +4,7 @@ var correctAnswer = "";
 let answeredCorrectly = 0;
 let answeredIncorrectly = 0;
 let top3Players = []
+let timerSecCounter = 59;
 const numberOfAnswerButtons = document.querySelectorAll(".answer-button").length
 const questionCard = document.getElementById("question-card");
 const startCard = document.getElementById("start-card");
@@ -16,10 +17,7 @@ const btn4 = document.getElementById("answer4");
 const player1 = startCard.children[2].children[0];
 const player2 = startCard.children[2].children[1];
 const player3 = startCard.children[2].children[2];
-const player1Score = player1.children[0];
-const player2Score = player2.children[0];
-const player3Score = player3.children[0];
-let timerSecCounter = 59;
+
 
 
 const questionsBank = [
@@ -128,6 +126,7 @@ for (let i=0;i<numberOfAnswerButtons; i++){
 
 // TODO: start game function
 function startGame(){
+
     gameTimer();
     nextQuestion();
 }
@@ -137,7 +136,6 @@ function gameTimer(){
     let min = Math.ceil(60 / totalSec);
     let zeroPad = "";
     let timer = setInterval(function(){
-        document.getElementById('timer').innerText = min+":"+zeroPad+timerSecCounter;
         if (timerSecCounter < 11 && timerSecCounter > 0){
             zeroPad = "0";
             timerSecCounter -= 1;
@@ -157,9 +155,12 @@ function gameTimer(){
             zeroPad = "";
             document.getElementById('timer').innerText = "10 Second Penalty!"
         } else {
-            document.getElementById("timer").innerHTML = "Something has gone terribly wrong!"; 
+            document.getElementById("timer").innerHTML = "Something has gone terribly wrong!";
+            clearInterval(timer); 
         }
+        document.getElementById('timer').innerText = min+":"+zeroPad+timerSecCounter;
     }, 1000);
+    
 }
 
 // TODO: check answer function
