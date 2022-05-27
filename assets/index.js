@@ -13,6 +13,12 @@ const btn1 = document.getElementById("answer1");
 const btn2 = document.getElementById("answer2");
 const btn3 = document.getElementById("answer3");
 const btn4 = document.getElementById("answer4");
+const player1 = startCard.children[2].children[0];
+const player2 = startCard.children[2].children[1];
+const player3 = startCard.children[2].children[2];
+const player1Score = player1.children[0];
+const player2Score = player2.children[0];
+const player3Score = player3.children[0];
 
 const questionsBank = [
     {
@@ -147,7 +153,7 @@ function gameTimer(){
         } else {
             document.getElementById("timer").innerHTML = "Something has gone terribly wrong!"; 
         }
-    }, 1000);
+    }, 100);
 }
 
 // TODO: check answer function
@@ -192,10 +198,27 @@ function nextQuestion(){
 
 // TODO: End of game function
 function endGame(){
-    currentUserInitials = prompt("Enter your initials to see how your rank!");
-    top3Players.push(currentUserInitials);
-    startCard.style.setProperty("display", "block");
-    startButton.style.setProperty("display", "block");
-    questionCard.style.setProperty("display", "none");
+    let gotInitials = false;
+    while (!gotInitials){
+        currentUserInitials = prompt("Enter your initials to see how you rank!");
+        if (currentUserInitials.length <= 3) {
+            const playerProfile = {
+                initials: currentUserInitials,
+                score: `${answeredCorrectly}/${answeredCorrectly+answeredIncorrectly} ${answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100}%`
+            }
+            top3Players.push(playerProfile);
+            startButton.style.setProperty("display", "block");
+            startCard.style.setProperty("display", "block");
+            questionCard.style.setProperty("display", "none");
+            gotInitials = true;
+        } else {
+            continue;
+        }
+    }
+    returnToStartScreen();
 }
 // TODO: Reset Game
+function returnToStartScreen(){
+    player1.innerText = top3Players[0].initials;
+    player1Score.innerHTML = top3Players[0].score;
+}
