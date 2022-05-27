@@ -1,9 +1,9 @@
-// quiz questions
+// Global variables
 var chosenAnswer = "";
 var correctAnswer = "";
 let answeredCorrectly = 0;
 let answeredIncorrectly = 0;
-let userInitials = []
+let top3Players = []
 const numberOfAnswerButtons = document.querySelectorAll(".answer-button").length
 const questionCard = document.getElementById("question-card");
 const startCard = document.getElementById("start-card");
@@ -14,7 +14,7 @@ const btn2 = document.getElementById("answer2");
 const btn3 = document.getElementById("answer3");
 const btn4 = document.getElementById("answer4");
 
-const questions = [
+const questionsBank = [
     {
         question: 'When a user views a page containing a JavaScript program, which machine actually executes the script?',
         A: "The User’s machine running a Web browser",
@@ -168,7 +168,6 @@ function checkAnswer(chosenAnswer) {
 // TODO: give user feedback on answer
 function feedback(correct){
     if (correct){
-        
         questionCard.classList.add("correct");
         setTimeout(()=>{
         questionCard.classList.remove("correct");
@@ -182,21 +181,21 @@ function feedback(correct){
 }
 // TODO: call next function
 function nextQuestion(){
-    displayedQuestion = questions[Math.floor(Math.random() * questions.length)];
+    displayedQuestion = questionsBank[Math.floor(Math.random() * questionsBank.length)];
     question.innerHTML = displayedQuestion.question;
-    btn1.innerHTML = displayedQuestion.A;
-    btn2.innerHTML = displayedQuestion.B;
-    btn3.innerHTML = displayedQuestion.C;
-    btn4.innerHTML = displayedQuestion.D;
+    btn1.innerText = displayedQuestion.A;
+    btn2.innerText = displayedQuestion.B;
+    btn3.innerText = displayedQuestion.C;
+    btn4.innerText = displayedQuestion.D;
     correctAnswer = displayedQuestion[displayedQuestion.Ans];
 }
 
 // TODO: End of game function
 function endGame(){
     currentUserInitials = prompt("Enter your initials to see how your rank!");
-    userInitials.push(currentUserInitials);
-    document.getElementById("start-card").style.setProperty("display", "block");
-    document.getElementById("start-button").style.setProperty("display", "block");
-    document.getElementById("question-card").style.setProperty("display", "none");
+    top3Players.push(currentUserInitials);
+    startCard.style.setProperty("display", "block");
+    startButton.style.setProperty("display", "block");
+    questionCard.style.setProperty("display", "none");
 }
 // TODO: Reset Game
