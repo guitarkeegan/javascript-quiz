@@ -151,7 +151,7 @@ function gameTimer(){
             clearInterval(timer);
             document.getElementById("timer").innerHTML = "00:00";
             endGame();
-        } else if (timerSecCounter < 0 && min > 0){
+        } else if (timerSecCounter < 0){
             timerSecCounter = 60 + timerSecCounter;
             min -= 1;
             zeroPad = "";
@@ -182,19 +182,23 @@ function feedback(correct){
     if (correct){
         const correctH2 = document.createElement("h2");
         correctH2.textContent = "Correct!";
-
+        questionCard.classList.add("correct");
         questionCard.appendChild(correctH2);
         setTimeout(()=>{
             questionCard.removeChild(correctH2)
+            questionCard.classList.remove("correct");
     }, 500);
    
     } else {
         const incorrectH2 = document.createElement("h2");
         incorrectH2.textContent = "Incorrect!";
         questionCard.appendChild(incorrectH2);
+        questionCard.classList.add("incorrect");
         setTimeout(()=>{
             questionCard.removeChild(incorrectH2);
+            questionCard.classList.remove("incorrect");
         }, 500)
+        document.getElementById('timer').innerText = "10 Second Penalty!"
         timerSecCounter -= 10;
     }
 }
