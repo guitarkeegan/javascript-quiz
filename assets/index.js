@@ -19,6 +19,8 @@ const player3 = startCard.children[2].children[2];
 const player1Score = player1.children[0];
 const player2Score = player2.children[0];
 const player3Score = player3.children[0];
+let timerSecCounter = 59;
+
 
 const questionsBank = [
     {
@@ -132,28 +134,32 @@ function startGame(){
 // TODO: create timer
 function gameTimer(){
     let totalSec = 120;
-    let secCounter = 59;
     let min = Math.ceil(60 / totalSec);
     let zeroPad = "";
     let timer = setInterval(function(){
-        document.getElementById('timer').innerHTML = min+":"+zeroPad+secCounter;
-        if (secCounter < 11 && secCounter > 0){
+        document.getElementById('timer').innerText = min+":"+zeroPad+timerSecCounter;
+        if (timerSecCounter < 11 && timerSecCounter > 0){
             zeroPad = "0";
-            secCounter -= 1;
-        } else if (secCounter > 1){
-            secCounter -= 1;
-        } else if (secCounter <= 0 && min >= 1){
-            secCounter = 59;
+            timerSecCounter -= 1;
+        } else if (timerSecCounter > 1){
+            timerSecCounter -= 1;
+        } else if (timerSecCounter === 0 && min >= 1){
+            timerSecCounter = 59;
             min -= 1;
             zeroPad = ""
-        } else if (secCounter <= 0 && min < 1) {
+        } else if (timerSecCounter <= 0 && min < 1) {
             clearInterval(timer);
             document.getElementById("timer").innerHTML = "00:00";
             endGame();
+        } else if (timerSecCounter < 0 && min > 0){
+            timerSecCounter = 60 + timerSecCounter;
+            min -= 1;
+            zeroPad = "";
+            document.getElementById('timer').innerText = "10 Second Penalty!"
         } else {
             document.getElementById("timer").innerHTML = "Something has gone terribly wrong!"; 
         }
-    }, 100);
+    }, 1000);
 }
 
 // TODO: check answer function
@@ -183,6 +189,7 @@ function feedback(correct){
         setTimeout(()=>{
             questionCard.classList.remove("incorrect");
         }, 500)
+        timerSecCounter -= 10;
     }
 }
 // TODO: call next function
@@ -201,10 +208,11 @@ function endGame(){
     let gotInitials = false;
     while (!gotInitials){
         currentUserInitials = prompt("Enter your initials to see how you rank!");
+        currentUserInitials = currentUserInitials.toUpperCase();
         if (currentUserInitials.length <= 3) {
             const playerProfile = {
                 initials: currentUserInitials,
-                score: `${answeredCorrectly}/${answeredCorrectly+answeredIncorrectly} ${answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100}%`
+                score: `Score: ${answeredCorrectly}/${answeredCorrectly+answeredIncorrectly}    Accuracy: ${(answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100).toPrecision(3)}%`
             }
             top3Players.push(playerProfile);
             startButton.style.setProperty("display", "block");
@@ -212,6 +220,7 @@ function endGame(){
             questionCard.style.setProperty("display", "none");
             gotInitials = true;
         } else {
+            alert("Initials can only be 3 characters long");
             continue;
         }
     }
@@ -219,6 +228,5 @@ function endGame(){
 }
 // TODO: Reset Game
 function returnToStartScreen(){
-    player1.innerText = top3Players[0].initials;
-    player1Score.innerHTML = top3Players[0].score;
+    player1.innerText = top3Players[0].initials + "    " + top3Players[0].score;
 }
