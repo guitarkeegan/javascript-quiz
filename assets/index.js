@@ -8,7 +8,11 @@ const numberOfAnswerButtons = document.querySelectorAll(".answer-button").length
 const questionCard = document.getElementById("question-card");
 const startCard = document.getElementById("start-card");
 const startButton = document.getElementById("start-button");
-
+const question = document.getElementById("question");
+const btn1 = document.getElementById("answer1");
+const btn2 = document.getElementById("answer2");
+const btn3 = document.getElementById("answer3");
+const btn4 = document.getElementById("answer4");
 
 const questions = [
     {
@@ -164,6 +168,7 @@ function checkAnswer(chosenAnswer) {
 // TODO: give user feedback on answer
 function feedback(correct){
     if (correct){
+        
         questionCard.classList.add("correct");
         setTimeout(()=>{
         questionCard.classList.remove("correct");
@@ -178,11 +183,11 @@ function feedback(correct){
 // TODO: call next function
 function nextQuestion(){
     displayedQuestion = questions[Math.floor(Math.random() * questions.length)];
-    document.getElementById("question").innerHTML = displayedQuestion.question;
-    document.getElementById("answer1").innerHTML = displayedQuestion.A;
-    document.getElementById("answer2").innerHTML = displayedQuestion.B;
-    document.getElementById("answer3").innerHTML = displayedQuestion.C;
-    document.getElementById("answer4").innerHTML = displayedQuestion.D;
+    question.innerHTML = displayedQuestion.question;
+    btn1.innerHTML = displayedQuestion.A;
+    btn2.innerHTML = displayedQuestion.B;
+    btn3.innerHTML = displayedQuestion.C;
+    btn4.innerHTML = displayedQuestion.D;
     correctAnswer = displayedQuestion[displayedQuestion.Ans];
 }
 
