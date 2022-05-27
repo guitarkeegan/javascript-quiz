@@ -4,6 +4,11 @@ var correctAnswer = "";
 let answeredCorrectly = 0;
 let answeredIncorrectly = 0;
 let userInitials = []
+const numberOfAnswerButtons = document.querySelectorAll(".answer-button").length
+const questionCard = document.getElementById("question-card");
+const startCard = document.getElementById("start-card");
+const startButton = document.getElementById("start-button");
+
 
 const questions = [
     {
@@ -78,13 +83,13 @@ const questions = [
 
 // event handlers
 document.getElementById("start-button").addEventListener("click", function(){
-    document.getElementById("start-card").style.setProperty("display", "none");
-    document.getElementById("start-button").style.setProperty("display", "none");
-    document.getElementById("question-card").style.setProperty("display", "block");
+    startCard.style.setProperty("display", "none");
+    startButton.style.setProperty("display", "none");
+    questionCard.style.setProperty("display", "block");
     startGame();
 });
 
-const numberOfAnswerButtons = document.querySelectorAll(".answer-button").length
+
 
 for (let i=0;i<numberOfAnswerButtons; i++){
     let answerLetter = "";
@@ -158,7 +163,6 @@ function checkAnswer(chosenAnswer) {
 }
 // TODO: give user feedback on answer
 function feedback(correct){
-    const questionCard = document.getElementById("question-card");
     if (correct){
         questionCard.classList.add("correct");
         setTimeout(()=>{
