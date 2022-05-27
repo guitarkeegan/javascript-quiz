@@ -110,25 +110,25 @@ ol li:hover {
     background-color:green;
 
 }
-#question-card.correct::before {
+/* #question-card.correct::before {
     font-family: 'Londrina Outline', cursive;
     content: "Correct!";
     font-size: 80px;
     color: red;
     font-weight: 400;
     
-}
+} */
 
 #question-card.incorrect {
     background-color: red;
 }
-#question-card.incorrect::before {
+/* #question-card.incorrect::before {
     font-family: 'Londrina Outline', cursive;
     content: "Incorrect!";
     font-size: 80px;
     color: green;
     font-weight: 400;
-}
+} */
 
 @media screen and (max-width: 1080px){
     main {

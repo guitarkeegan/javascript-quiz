@@ -180,14 +180,20 @@ function checkAnswer(chosenAnswer) {
 // TODO: give user feedback on answer
 function feedback(correct){
     if (correct){
-        questionCard.classList.add("correct");
+        const correctH2 = document.createElement("h2");
+        correctH2.textContent = "Correct!";
+
+        questionCard.appendChild(correctH2);
         setTimeout(()=>{
-        questionCard.classList.remove("correct");
+            questionCard.removeChild(correctH2)
     }, 500);
+   
     } else {
-        questionCard.classList.add("incorrect");
+        const incorrectH2 = document.createElement("h2");
+        incorrectH2.textContent = "Incorrect!";
+        questionCard.appendChild(incorrectH2);
         setTimeout(()=>{
-            questionCard.classList.remove("incorrect");
+            questionCard.removeChild(incorrectH2);
         }, 500)
         timerSecCounter -= 10;
     }
