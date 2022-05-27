@@ -3,7 +3,7 @@ var chosenAnswer = "";
 var correctAnswer = "";
 let answeredCorrectly = 0;
 let answeredIncorrectly = 0;
-let top3Players = []
+let allScores = []
 // timer variables
 let timerSecCounter = 59;
 let totalSec = 120;
@@ -19,9 +19,10 @@ const btn1 = document.getElementById("answer1");
 const btn2 = document.getElementById("answer2");
 const btn3 = document.getElementById("answer3");
 const btn4 = document.getElementById("answer4");
-const player1 = startCard.children[2].children[0];
-const player2 = startCard.children[2].children[1];
-const player3 = startCard.children[2].children[2];
+const startOl = document.getElementById("top-scores");
+// display any current scores
+
+
 
 
 
@@ -131,6 +132,9 @@ for (let i=0;i<numberOfAnswerButtons; i++){
 
 // TODO: start game function
 function startGame(){
+    for (let i=startOl.children.length; i>0; i--){
+        startOl.removeChild(startOl.children[i]);
+    }
     
     gameTimer();
     nextQuestion();
@@ -225,9 +229,10 @@ function endGame(){
         if (currentUserInitials.length <= 3) {
             const playerProfile = {
                 initials: currentUserInitials,
+                accuracy: (answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100).toPrecision(3),
                 score: `Score: ${answeredCorrectly}/${answeredCorrectly+answeredIncorrectly}    Accuracy: ${(answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100).toPrecision(3)}%`
             }
-            top3Players.push(playerProfile);
+            allScores.push(playerProfile);
             startButton.style.setProperty("display", "block");
             startCard.style.setProperty("display", "block");
             questionCard.style.setProperty("display", "none");
@@ -238,12 +243,23 @@ function endGame(){
         }
     }
     resetGame();
+    getScores();
 }
 // TODO: Reset Game
-function resetGame(){
-    player1.innerText = top3Players[0].initials + "    " + top3Players[0].score;
+function resetGame(){ 
     timerSecCounter = 59;
     totalSec = 120;
     min = 1;
     zeroPad = "";
+}
+
+function getScores(){
+    if (allScores.length > 0){
+        allScores.sort((a, b) => (a.accuracy > b.accuracy) ? 1 : (a.accuracy < b.accuracy) ? -1 : 0);
+    for (let i=0; i<allScores.length; i++){
+        const scoreLi = document.createElement("li")
+        scoreLi.innerText = allScores[i].initials + "      " + allScores[i].score;
+        startOl.appendChild(scoreLi);
+    }
+    }
 }
