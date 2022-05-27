@@ -4,7 +4,12 @@ var correctAnswer = "";
 let answeredCorrectly = 0;
 let answeredIncorrectly = 0;
 let top3Players = []
+// timer variables
 let timerSecCounter = 59;
+let totalSec = 120;
+let min = Math.ceil(60 / totalSec); // problem here
+let zeroPad = "";
+// dom references
 const numberOfAnswerButtons = document.querySelectorAll(".answer-button").length
 const questionCard = document.getElementById("question-card");
 const startCard = document.getElementById("start-card");
@@ -126,15 +131,13 @@ for (let i=0;i<numberOfAnswerButtons; i++){
 
 // TODO: start game function
 function startGame(){
-
+    
     gameTimer();
     nextQuestion();
 }
 // TODO: create timer
 function gameTimer(){
-    let totalSec = 120;
-    let min = Math.ceil(60 / totalSec);
-    let zeroPad = "";
+    
     let timer = setInterval(function(){
         if (timerSecCounter < 11 && timerSecCounter > 0){
             zeroPad = "0";
@@ -199,7 +202,6 @@ function feedback(correct){
             questionCard.removeChild(incorrectH2);
             questionCard.classList.remove("incorrect");
         }, 500)
-        document.getElementById('timer').innerText = "10 Second Penalty!"
         timerSecCounter -= 10;
     }
 }
@@ -235,9 +237,13 @@ function endGame(){
             continue;
         }
     }
-    returnToStartScreen();
+    resetGame();
 }
 // TODO: Reset Game
-function returnToStartScreen(){
+function resetGame(){
     player1.innerText = top3Players[0].initials + "    " + top3Players[0].score;
+    timerSecCounter = 59;
+    totalSec = 120;
+    min = 1;
+    zeroPad = "";
 }
