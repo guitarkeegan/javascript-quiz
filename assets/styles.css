@@ -83,6 +83,7 @@ span {
     width: 640px;
     padding: 40px 20px 10px;
     border: 5px solid black;
+    line-height: 1.5;
     display: none;
 }
 
@@ -106,15 +107,27 @@ ol li:hover {
 }
 
 #question-card.correct {
-    background-color:blanchedalmond;
+    background-color:green;
 
 }
-#question-card.correct::after {
+#question-card.correct::before {
+    font-family: 'Londrina Outline', cursive;
     content: "Correct!";
     font-size: 80px;
-    color: var(--highlight);
-    font-weight: 900;
+    color: red;
+    font-weight: 400;
     
+}
+
+#question-card.incorrect {
+    background-color: red;
+}
+#question-card.incorrect::before {
+    font-family: 'Londrina Outline', cursive;
+    content: "Incorrect!";
+    font-size: 80px;
+    color: green;
+    font-weight: 400;
 }
 
 @media screen and (max-width: 1080px){

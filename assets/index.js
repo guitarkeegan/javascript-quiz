@@ -148,22 +148,28 @@ function checkAnswer(chosenAnswer) {
     if (chosenAnswer === correctAnswer){
         console.log("correct!");
         answeredCorrectly += 1;
-        feedbackIsCorrect();
+        feedback(true);
         nextQuestion();
     } else {
-        console.log("sorry! No dice.");
+        feedback(false);
         answeredIncorrectly += 1;
         nextQuestion();
     }
 }
 // TODO: give user feedback on answer
-function feedbackIsCorrect(){
+function feedback(correct){
     const questionCard = document.getElementById("question-card");
-    console.log(questionCard)
-    questionCard.classList.add("correct");
-    setTimeout(()=>{
+    if (correct){
+        questionCard.classList.add("correct");
+        setTimeout(()=>{
         questionCard.classList.remove("correct");
     }, 500);
+    } else {
+        questionCard.classList.add("incorrect");
+        setTimeout(()=>{
+            questionCard.classList.remove("incorrect");
+        }, 500)
+    }
 }
 // TODO: call next function
 function nextQuestion(){
