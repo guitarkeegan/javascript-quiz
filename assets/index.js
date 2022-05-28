@@ -132,7 +132,7 @@ for (let i=0;i<numberOfAnswerButtons; i++){
 
 // TODO: start game function
 function startGame(){
-    for (let i=startOl.children.length; i>0; i--){
+    for (let i=startOl.children.length-1; i>=0; i--){
         startOl.removeChild(startOl.children[i]);
     }
     
@@ -172,10 +172,7 @@ function gameTimer(){
 
 // TODO: check answer function
 function checkAnswer(chosenAnswer) {
-    console.log(chosenAnswer);
-    console.log(correctAnswer);
     if (chosenAnswer === correctAnswer){
-        console.log("correct!");
         answeredCorrectly += 1;
         feedback(true);
         nextQuestion();
