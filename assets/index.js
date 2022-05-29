@@ -21,7 +21,7 @@ const btn3 = document.getElementById("answer3");
 const btn4 = document.getElementById("answer4");
 const startOl = document.getElementById("top-scores");
 // display any current scores
-
+getScores();
 
 
 
@@ -132,9 +132,10 @@ for (let i=0;i<numberOfAnswerButtons; i++){
 
 // TODO: start game function
 function startGame(){
-    for (let i=startOl.children.length-1; i>=0; i--){
-        startOl.removeChild(startOl.children[i]);
-    }
+    resetGame();
+
+    console.log(startOl.children.length);
+    console.log(startOl.children);
     
     gameTimer();
     nextQuestion();
@@ -223,23 +224,23 @@ function endGame(){
     while (!gotInitials){
         currentUserInitials = prompt("Enter your initials to see how you rank!");
         currentUserInitials = currentUserInitials.toUpperCase();
-        if (currentUserInitials.length <= 3) {
+        if (currentUserInitials.length <= 3 && currentUserInitials.length >= 1) {
             const playerProfile = {
                 initials: currentUserInitials,
-                accuracy: (answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100).toPrecision(3),
+                accuracy: parseFloat((answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100).toPrecision(3)),
                 score: `Score: ${answeredCorrectly}/${answeredCorrectly+answeredIncorrectly}    Accuracy: ${(answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100).toPrecision(3)}%`
             }
             allScores.push(playerProfile);
-            startButton.style.setProperty("display", "block");
-            startCard.style.setProperty("display", "block");
             questionCard.style.setProperty("display", "none");
+            startCard.style.setProperty("display", "block");
+            startButton.style.setProperty("display", "block");
             gotInitials = true;
         } else {
             alert("Initials can only be 3 characters long");
             continue;
         }
     }
-    resetGame();
+    
     getScores();
 }
 // TODO: Reset Game
@@ -248,15 +249,25 @@ function resetGame(){
     totalSec = 120;
     min = 1;
     zeroPad = "";
+    if (startOl.children.length > 0){
+        while (startOl.lastElementChild) {
+            startOl.removeChild(startOl.lastElementChild);
+            console.log("removed child");
+          }
+    }
 }
 
 function getScores(){
     if (allScores.length > 0){
         allScores.sort((a, b) => (a.accuracy > b.accuracy) ? 1 : (a.accuracy < b.accuracy) ? -1 : 0);
+        allScores.reverse()
     for (let i=0; i<allScores.length; i++){
         const scoreLi = document.createElement("li")
         scoreLi.innerText = allScores[i].initials + "      " + allScores[i].score;
         startOl.appendChild(scoreLi);
     }
     }
+    
 }
+// the parsing is working, but the display is broken
+// TODO: create form to collect initials
