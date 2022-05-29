@@ -265,9 +265,11 @@ function getScores(){
         const scoreLi = document.createElement("li")
         scoreLi.innerText = allScores[i].initials + "      " + allScores[i].score;
         startOl.appendChild(scoreLi);
+        if (startOl.children.length === 3){
+            break;
+        }
     }
     }
     
 }
-// the parsing is working, but the display is broken
 // TODO: create form to collect initials
