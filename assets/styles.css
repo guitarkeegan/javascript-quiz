@@ -57,6 +57,7 @@ span {
     border-radius: 40px;
     box-shadow: 3px 3px 5px;
     background-color: var(--cc);
+    margin: 0 auto;
 }
 
 #start-button:hover {
