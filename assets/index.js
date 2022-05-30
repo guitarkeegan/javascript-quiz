@@ -1,9 +1,11 @@
 // Global variables
 var chosenAnswer = "";
 var correctAnswer = "";
+let chosenIndex = 0;
 let answeredCorrectly = 0;
 let answeredIncorrectly = 0;
 let allScores = []
+let pickedQuestions = []
 // timer variables
 let timerSecCounter = 59;
 let totalSec = 120;
@@ -20,11 +22,6 @@ const btn2 = document.getElementById("answer2");
 const btn3 = document.getElementById("answer3");
 const btn4 = document.getElementById("answer4");
 const startOl = document.getElementById("top-scores");
-// display any current scores
-getScores();
-
-
-
 
 const questionsBank = [
     {
@@ -97,6 +94,8 @@ const questionsBank = [
         Ans: 'B'}
     ]
 
+let unpickedQuestions = [...questionsBank];
+
 // event handlers
 document.getElementById("start-button").addEventListener("click", function(){
     startCard.style.setProperty("display", "none");
@@ -132,11 +131,7 @@ for (let i=0;i<numberOfAnswerButtons; i++){
 
 // TODO: start game function
 function startGame(){
-    resetGame();
-
-    console.log(startOl.children.length);
-    console.log(startOl.children);
-    
+    resetGame();    
     gameTimer();
     nextQuestion();
 }
@@ -144,7 +139,10 @@ function startGame(){
 function gameTimer(){
     
     let timer = setInterval(function(){
-        if (timerSecCounter < 11 && timerSecCounter > 0){
+        if (unpickedQuestions.length === 0){
+            clearInterval(timer);
+            console.log("timer cleared")
+        } else if (timerSecCounter < 11 && timerSecCounter > 0){
             zeroPad = "0";
             timerSecCounter -= 1;
         } else if (timerSecCounter > 1){
@@ -176,11 +174,9 @@ function checkAnswer(chosenAnswer) {
     if (chosenAnswer === correctAnswer){
         answeredCorrectly += 1;
         feedback(true);
-        nextQuestion();
     } else {
-        feedback(false);
         answeredIncorrectly += 1;
-        nextQuestion();
+        feedback(false);
     }
 }
 // TODO: give user feedback on answer
@@ -206,16 +202,25 @@ function feedback(correct){
         }, 500)
         timerSecCounter -= 10;
     }
+    removeQuestion();
+    nextQuestion();
 }
 // TODO: call next function
 function nextQuestion(){
-    displayedQuestion = questionsBank[Math.floor(Math.random() * questionsBank.length)];
-    question.innerHTML = displayedQuestion.question;
-    btn1.innerText = displayedQuestion.A;
-    btn2.innerText = displayedQuestion.B;
-    btn3.innerText = displayedQuestion.C;
-    btn4.innerText = displayedQuestion.D;
-    correctAnswer = displayedQuestion[displayedQuestion.Ans];
+    console.log("unpickedQuestions length is " + unpickedQuestions.length);
+    if (unpickedQuestions.length === 0){
+        endGame();
+    } else {
+        chosenIndex = Math.floor(Math.random() * unpickedQuestions.length);
+        displayedQuestion = unpickedQuestions[chosenIndex];
+        question.innerHTML = displayedQuestion.question;
+        btn1.innerText = displayedQuestion.A;
+        btn2.innerText = displayedQuestion.B;
+        btn3.innerText = displayedQuestion.C;
+        btn4.innerText = displayedQuestion.D;
+        correctAnswer = displayedQuestion[displayedQuestion.Ans];
+    }
+    
 }
 
 // TODO: End of game function
@@ -240,15 +245,25 @@ function endGame(){
             continue;
         }
     }
-    
     getScores();
 }
 // TODO: Reset Game
 function resetGame(){ 
+    console.log("game resetting!")
     timerSecCounter = 59;
     totalSec = 120;
     min = 1;
     zeroPad = "";
+    correctAnswer = "";
+    chosenAnswer = "";
+    answeredCorrectly = 0;
+    answeredIncorrectly = 0;
+    pickedQuestions = [];
+    if (unpickedQuestions.length === 0){
+        unpickedQuestions = [...questionsBank];
+        console.log(unpickedQuestions);
+        console.log("pushing question!");
+    }
     if (startOl.children.length > 0){
         while (startOl.lastElementChild) {
             startOl.removeChild(startOl.lastElementChild);
@@ -270,6 +285,10 @@ function getScores(){
         }
     }
     }
-    
+    return;
+}
+
+function removeQuestion(){
+    pickedQuestions.push(unpickedQuestions.splice(chosenIndex, 1));
 }
 // TODO: create form to collect initials
