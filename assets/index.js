@@ -169,7 +169,7 @@ function gameTimer(){
     
     timer = setInterval(function(){
         if (unpickedQuestions.length === 0){
-            clearInterval(timer);
+            setTimeout(()=>clearInterval(timer), 1000);
         } else if (timerSecCounter < 11 && timerSecCounter > 0){
             zeroPad = "0";
             timerSecCounter -= 1;
@@ -236,7 +236,7 @@ function feedback(correct){
 // TODO: call next function
 function nextQuestion(){
     if (unpickedQuestions.length === 0){
-        endGame();
+        setTimeout(endGame, 1000); 
     } else {
         chosenIndex = Math.floor(Math.random() * unpickedQuestions.length);
         displayedQuestion = unpickedQuestions[chosenIndex];
