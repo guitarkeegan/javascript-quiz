@@ -11,7 +11,7 @@ var timer;
 // timer variables
 let timerSecCounter = 59;
 let totalSec = 120;
-let min = Math.ceil(60 / totalSec); // problem here
+let min = Math.ceil(60 / totalSec);
 let zeroPad = "";
 // dom references
 const numberOfAnswerButtons = document.querySelectorAll(".answer-button").length
@@ -103,14 +103,14 @@ const questionsBank = [
 
 let unpickedQuestions = [...questionsBank];
 
-// event handlers
+// listener to start the game
 startButton.addEventListener("click", function(){
     startCard.style.setProperty("display", "none");
     startButton.style.setProperty("display", "none");
     questionCard.style.setProperty("display", "block");
     startGame();
 });
-
+// listener to submit initials, log score to local storage, and display the start menu again
 initialsForm.addEventListener("submit", function(event){
     event.preventDefault();
     currentUserInitials = formInput.value;
@@ -134,7 +134,7 @@ initialsForm.addEventListener("submit", function(event){
 })
 
 
-
+// create event listeners for the answer choice buttons (list items)
 for (let i=0;i<numberOfAnswerButtons; i++){
     let answerLetter = "";
     switch (i) {
@@ -158,13 +158,14 @@ for (let i=0;i<numberOfAnswerButtons; i++){
     });
 }
 
-// TODO: start game function
+// Starts the game, resets several values and the timer from the previous game, and calls the first question.
 function startGame(){
     resetGame();    
     gameTimer();
     nextQuestion();
 }
-// TODO: create timer
+
+// The game timer will give proper zero padding when the seconds drop to single digits.
 function gameTimer(){
     
     timer = setInterval(function(){
@@ -197,7 +198,7 @@ function gameTimer(){
     
 }
 
-// TODO: check answer function
+// check if answer was correct. It is passed the user's selected answer.
 function checkAnswer(chosenAnswer) {
     if (chosenAnswer === correctAnswer){
         answeredCorrectly += 1;
@@ -207,7 +208,7 @@ function checkAnswer(chosenAnswer) {
         feedback(false);
     }
 }
-// TODO: give user feedback on answer
+// User is given feedback, depending on if the parameter was true or false.
 function feedback(correct){
     if (correct){
         const correctH2 = document.createElement("h2");
