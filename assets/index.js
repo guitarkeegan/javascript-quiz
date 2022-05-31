@@ -6,6 +6,7 @@ let answeredCorrectly = 0;
 let answeredIncorrectly = 0;
 let allScores = []
 let pickedQuestions = []
+let currentUserInitials = "";
 // timer variables
 let timerSecCounter = 59;
 let totalSec = 120;
@@ -16,12 +17,17 @@ const numberOfAnswerButtons = document.querySelectorAll(".answer-button").length
 const questionCard = document.getElementById("question-card");
 const startCard = document.getElementById("start-card");
 const startButton = document.getElementById("start-button");
+const initialsCard = document.getElementById("initials-card");
+const initialsForm = document.getElementById("initials-form");
+const formInput = document.getElementById("initials-input");
+const formButton = document.getElementById("initials-button");
 const question = document.getElementById("question");
 const btn1 = document.getElementById("answer1");
 const btn2 = document.getElementById("answer2");
 const btn3 = document.getElementById("answer3");
 const btn4 = document.getElementById("answer4");
 const startOl = document.getElementById("top-scores");
+
 
 const questionsBank = [
     {
@@ -97,12 +103,34 @@ const questionsBank = [
 let unpickedQuestions = [...questionsBank];
 
 // event handlers
-document.getElementById("start-button").addEventListener("click", function(){
+startButton.addEventListener("click", function(){
     startCard.style.setProperty("display", "none");
     startButton.style.setProperty("display", "none");
     questionCard.style.setProperty("display", "block");
     startGame();
 });
+
+initialsForm.addEventListener("submit", function(event){
+    event.preventDefault();
+    currentUserInitials = formInput.value;
+    if (currentUserInitials.length <= 3 && currentUserInitials.length >= 1) {
+        currentUserInitials = currentUserInitials.toUpperCase();
+        const playerProfile = {
+            initials: currentUserInitials,
+            accuracy: parseFloat((answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100).toPrecision(3)),
+            score: `Score: ${answeredCorrectly}/${answeredCorrectly+answeredIncorrectly}    Accuracy: ${(answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100).toPrecision(3)}%`
+        }
+        allScores.push(playerProfile);
+        formInput.value = "";
+        questionCard.style.setProperty("display", "none");
+        startCard.style.setProperty("display", "block");
+        startButton.style.setProperty("display", "block");
+        initialsCard.style.setProperty("display", "none");
+        getScores();
+    } else {
+        alert("Initials can only be 3 characters long");
+    }
+})
 
 
 
@@ -225,27 +253,8 @@ function nextQuestion(){
 
 // TODO: End of game function
 function endGame(){
-    let gotInitials = false;
-    while (!gotInitials){
-        currentUserInitials = prompt("Enter your initials to see how you rank!");
-        currentUserInitials = currentUserInitials.toUpperCase();
-        if (currentUserInitials.length <= 3 && currentUserInitials.length >= 1) {
-            const playerProfile = {
-                initials: currentUserInitials,
-                accuracy: parseFloat((answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100).toPrecision(3)),
-                score: `Score: ${answeredCorrectly}/${answeredCorrectly+answeredIncorrectly}    Accuracy: ${(answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100).toPrecision(3)}%`
-            }
-            allScores.push(playerProfile);
-            questionCard.style.setProperty("display", "none");
-            startCard.style.setProperty("display", "block");
-            startButton.style.setProperty("display", "block");
-            gotInitials = true;
-        } else {
-            alert("Initials can only be 3 characters long");
-            continue;
-        }
-    }
-    getScores();
+    questionCard.style.setProperty("display", "none");
+    initialsCard.style.setProperty("display", "block");
 }
 // TODO: Reset Game
 function resetGame(){ 
@@ -259,6 +268,7 @@ function resetGame(){
     answeredCorrectly = 0;
     answeredIncorrectly = 0;
     pickedQuestions = [];
+    currentUserInitials = "";
     if (unpickedQuestions.length === 0){
         unpickedQuestions = [...questionsBank];
         console.log(unpickedQuestions);

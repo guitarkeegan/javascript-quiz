@@ -19,7 +19,14 @@ main {
     margin: 200px;
     text-align: center;
 }
-
+input {
+    height: 90px;
+    font-size: 40px;
+    border-radius: 20%;
+    text-align: center;
+    width: 95px;
+    margin-top: 40px;
+}
 ul {
     list-style: none;
     font-size: 2.2rem;
@@ -43,6 +50,10 @@ p {
     margin: 0 40px 20px 0;
     font-size: 2rem;
     
+}
+
+label {
+    font-size: 2rem;
 }
 
 span {
@@ -122,12 +133,34 @@ ol li:hover {
     color: green;
     font-weight: 400;
 }
+#initials-card {
+    border-radius: 40px;
+    background-color: var(--cc);
+    position: relative;
+    margin: 0 auto 20px;
+    height: 400px;
+    width: 640px;
+    padding: 40px 20px 10px;
+    border: 5px solid black;
+    line-height: 1.5;
+    display: none;
+}
+
+#initials-card button{
+    height: 100px;
+    width: 200px;
+    font-size: 2rem;
+    border-radius: 40px;
+    box-shadow: 3px 3px 5px;
+    background-color: var(--bg);
+    margin: 67px auto;
+}
 
 @media screen and (max-width: 1080px){
     main {
         margin: 200px 0;
     }
-    #start-card, #question-card {
+    #start-card, #question-card, #initials-card {
         width: 80vw;
     }
     p {
@@ -141,7 +174,16 @@ ol li:hover {
     main {
         margin: 80px 0 0 0;
     }
-    #start-card, #question-card {
+    #start-card, #question-card, #initials-card {
         padding-bottom: 60px;
 }
+}
+
+@media screen and (max-width: 625){
+    #start-card, #question-card, #initials-card {
+        padding-bottom: 213px;
+    }
+    h1{
+        font-size: 1rem;
+    }
 }
