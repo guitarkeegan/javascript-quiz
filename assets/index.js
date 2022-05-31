@@ -82,7 +82,7 @@ const questionsBank = [
         question: 'How does JavaScript store dates in a date object?',
         A: 'The number of milliseconds since January 1st, 1970',
         B: 'The number of days since January 1st, 1900',
-        C: 'The number of seconds since Netscape‚Äôs public stock offering.',
+        C: "The number of seconds since Netscape's public stock offering.",
         D: 'None of the above',
         Ans: 'A'},
     {
@@ -235,7 +235,6 @@ function feedback(correct){
 }
 // TODO: call next function
 function nextQuestion(){
-    console.log("unpickedQuestions length is " + unpickedQuestions.length);
     if (unpickedQuestions.length === 0){
         endGame();
     } else {
@@ -282,6 +281,7 @@ function getScores(){
     if (allScores.length > 0){
         allScores.sort((a, b) => (a.accuracy > b.accuracy) ? 1 : (a.accuracy < b.accuracy) ? -1 : 0);
         allScores.reverse()
+        saveLocally();
     for (let i=0; i<allScores.length; i++){
         const scoreLi = document.createElement("li")
         scoreLi.innerText = allScores[i].initials + "      " + allScores[i].score;
@@ -297,4 +297,19 @@ function getScores(){
 function removeQuestion(){
     pickedQuestions.push(unpickedQuestions.splice(chosenIndex, 1));
 }
-// TODO: create form to collect initials
+
+function saveLocally(){
+    localStorage.setItem("javascript-quiz", JSON.stringify(allScores));
+}
+
+function loadLocally(){
+    const localScores = JSON.parse(localStorage.getItem("javascript-quiz"));
+    if (localScores !== null){
+        allScores = [...localScores];
+    } else {
+        return;
+    }
+}
+
+loadLocally();
+getScores();
