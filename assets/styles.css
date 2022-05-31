@@ -126,6 +126,11 @@ ol li:hover {
     font-weight: 400;
 }
 
+#instructions {
+    font-size: 16px;
+    text-align: center;
+}
+
 #question-card.incorrect {
     font-family: 'Londrina Outline', cursive;
     background-color: red;
