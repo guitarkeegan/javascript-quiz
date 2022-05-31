@@ -7,6 +7,7 @@ let answeredIncorrectly = 0;
 let allScores = []
 let pickedQuestions = []
 let currentUserInitials = "";
+var timer;
 // timer variables
 let timerSecCounter = 59;
 let totalSec = 120;
@@ -166,10 +167,9 @@ function startGame(){
 // TODO: create timer
 function gameTimer(){
     
-    let timer = setInterval(function(){
+    timer = setInterval(function(){
         if (unpickedQuestions.length === 0){
             clearInterval(timer);
-            console.log("timer cleared")
         } else if (timerSecCounter < 11 && timerSecCounter > 0){
             zeroPad = "0";
             timerSecCounter -= 1;
@@ -258,7 +258,6 @@ function endGame(){
 }
 // TODO: Reset Game
 function resetGame(){ 
-    console.log("game resetting!")
     timerSecCounter = 59;
     totalSec = 120;
     min = 1;
@@ -271,13 +270,10 @@ function resetGame(){
     currentUserInitials = "";
     if (unpickedQuestions.length === 0){
         unpickedQuestions = [...questionsBank];
-        console.log(unpickedQuestions);
-        console.log("pushing question!");
     }
     if (startOl.children.length > 0){
         while (startOl.lastElementChild) {
             startOl.removeChild(startOl.lastElementChild);
-            console.log("removed child");
           }
     }
 }

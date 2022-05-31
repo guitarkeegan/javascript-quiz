@@ -156,6 +156,11 @@ ol li:hover {
     margin: 67px auto;
 }
 
+#initials-card button:hover {
+    cursor: pointer;
+    border-color: var(--highlight);
+}
+
 @media screen and (max-width: 1080px){
     main {
         margin: 200px 0;
