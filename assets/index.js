@@ -119,7 +119,7 @@ initialsForm.addEventListener("submit", function(event){
         const playerProfile = {
             initials: currentUserInitials,
             accuracy: parseFloat((answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100).toPrecision(3)),
-            score: `Score: ${answeredCorrectly}/${answeredCorrectly+answeredIncorrectly}    Accuracy: ${(answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100).toPrecision(3)}%`
+            score: `${answeredCorrectly}/${answeredCorrectly + answeredIncorrectly}`
         }
         allScores.push(playerProfile);
         formInput.value = "";
@@ -285,7 +285,7 @@ function getScores(){
         saveLocally();
     for (let i=0; i<allScores.length; i++){
         const scoreLi = document.createElement("li")
-        scoreLi.innerText = allScores[i].initials + "      " + allScores[i].score;
+        scoreLi.innerText = allScores[i].initials + " " + "Score: " + allScores[i].score + " " + "Accuracy: " + allScores[i].accuracy + "%";
         startOl.appendChild(scoreLi);
         if (startOl.children.length === 3){
             break;
