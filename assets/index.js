@@ -9,7 +9,7 @@ let pickedQuestions = []
 let currentUserInitials = "";
 var timer;
 // timer variables
-let timerSecCounter = 0;
+let timerSecCounter = 59;
 let totalSec = 120;
 let min = Math.ceil(60 / totalSec);
 let zeroPad = "";
