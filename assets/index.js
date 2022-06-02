@@ -70,7 +70,7 @@ const questionsBank = [
         B: 'Accept parameters and Return a value',
         C: 'Accept parameters',
         D: 'None of the above',
-        Ans: 'C'},
+        Ans: 'B'},
     {
         question: 'Which of the following is not a valid JavaScript variable name?',
         A: '2names',
@@ -86,7 +86,7 @@ const questionsBank = [
         D: 'None of the above',
         Ans: 'A'},
     {
-        question: 'Which of the following attribute can hold the JavaScript version?',
+        question: 'Which of the following attributes can hold the JavaScript version?',
         A: 'LANGUAGE',
         B: 'SCRIPT',
         C: 'VERSION',
