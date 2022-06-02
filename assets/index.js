@@ -237,7 +237,7 @@ function feedback(correct){
 // TODO: call next function
 function nextQuestion(){
     if (unpickedQuestions.length === 0){
-        setTimeout(endGame, 1000); 
+        setTimeout(endGame, 501); 
     } else {
         chosenIndex = Math.floor(Math.random() * unpickedQuestions.length);
         displayedQuestion = unpickedQuestions[chosenIndex];
@@ -248,7 +248,6 @@ function nextQuestion(){
         btn4.innerText = displayedQuestion.D;
         correctAnswer = displayedQuestion[displayedQuestion.Ans];
     }
-    
 }
 
 // TODO: End of game function
