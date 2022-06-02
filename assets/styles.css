@@ -79,7 +79,7 @@ span {
     background-color: var(--cc);
     position: relative;
     margin: 0 auto 20px;
-    height: 400px;
+    height: auto;
     width: 640px;
     padding: 40px 20px 10px;
     border: 5px solid black;
@@ -109,7 +109,7 @@ ol li {
     border: 2px solid var(--bg);
     margin: 5px 0;
     border-radius: 40px;
-    padding-left: 3px;
+    padding-left: 10px;
     
 }
 
@@ -172,12 +172,21 @@ ol li:hover {
     }
     #start-card, #question-card, #initials-card {
         width: 80vw;
+        height: auto;
+        padding-bottom: 30px;
     }
     p {
         text-align: right;
         margin: 0 40px 0 0;
         font-size: 2rem;
     }
+    ol li {
+        padding-left: 10px;
+    }
+    ol li:hover {
+        border-color: var(--bg);
+    }
+
 }
 
 @media screen and (max-width: 740px) {
@@ -185,8 +194,12 @@ ol li:hover {
         margin: 80px 0 0 0;
     }
     #start-card, #question-card, #initials-card {
-        padding-bottom: 60px;
+        height: auto;
+        padding-bottom: 30px;
 }
+    ol li {
+        padding-left: 10px;
+    }
 }
 
 @media screen and (max-width: 480px){
@@ -204,10 +217,6 @@ ol li:hover {
     }
     ol li {
         padding-left: 10px;
-    }
-    ol li:hover {
-        cursor: none;
-        border-color: var(--highlight);
     }
 
 }
