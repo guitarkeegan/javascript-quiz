@@ -119,7 +119,7 @@ initialsForm.addEventListener("submit", function(event){
         const playerProfile = {
             initials: currentUserInitials,
             accuracy: parseFloat((answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100).toPrecision(3)),
-            score: `${answeredCorrectly}/${answeredCorrectly + answeredIncorrectly}`
+            score: answeredCorrectly
         }
         allScores.push(playerProfile);
         formInput.value = "";
@@ -280,12 +280,12 @@ function resetGame(){
 
 function getScores(){
     if (allScores.length > 0){
-        allScores.sort((a, b) => (a.accuracy > b.accuracy) ? 1 : (a.accuracy < b.accuracy) ? -1 : 0);
+        allScores.sort((a, b) => (a.score > b.score) ? 1 : (a.score < b.score) ? -1 : 0);
         allScores.reverse()
         saveLocally();
     for (let i=0; i<allScores.length; i++){
         const scoreLi = document.createElement("li")
-        scoreLi.innerText = allScores[i].initials + " " + "Score: " + allScores[i].score + " " + "Accuracy: " + allScores[i].accuracy + "%";
+        scoreLi.innerText = allScores[i].initials + " " + "Score: " + allScores[i].score + "/" + (questionsBank.length) + " " + "Accuracy: " + allScores[i].accuracy + "%";
         startOl.appendChild(scoreLi);
         if (startOl.children.length === 3){
             break;
