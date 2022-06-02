@@ -29,7 +29,7 @@ input {
 }
 ul {
     list-style: none;
-    font-size: 2.2rem;
+    font-size: 1.5rem;
     color: var(--bg);
 }
 
@@ -110,6 +110,7 @@ ol li {
     margin: 5px 0;
     border-radius: 40px;
     padding-left: 3px;
+    
 }
 
 ol li:hover {
@@ -188,16 +189,25 @@ ol li:hover {
 }
 }
 
-@media screen and (max-width: 625px){
+@media screen and (max-width: 480px){
 
     #start-card, #question-card, #initials-card {
-        padding-bottom: 213px;
-        
+        height: auto;
+        padding-bottom: 30px;
     }
     h1{
         font-size: 1.5rem;
     }
     ol {
         list-style: none;
+        
     }
+    ol li {
+        padding-left: 10px;
+    }
+    ol li:hover {
+        cursor: none;
+        border-color: var(--highlight);
+    }
+
 }
