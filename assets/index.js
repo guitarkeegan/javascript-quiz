@@ -287,9 +287,7 @@ function getScores(){
         const scoreLi = document.createElement("li")
         scoreLi.innerText = allScores[i].initials + " " + "Score: " + allScores[i].score + "/" + (questionsBank.length) + " " + "Accuracy: " + allScores[i].accuracy + "%";
         startOl.appendChild(scoreLi);
-        if (startOl.children.length === 3){
-            break;
-        }
+
     }
     }
     return;
