@@ -9,7 +9,7 @@ let pickedQuestions = []
 let currentUserInitials = "";
 var timer;
 // timer variables
-let timerSecCounter = 59;
+let timerSecCounter = 0;
 let totalSec = 120;
 let min = Math.ceil(60 / totalSec);
 let zeroPad = "";
@@ -160,14 +160,14 @@ for (let i=0;i<numberOfAnswerButtons; i++){
 
 // Starts the game, resets several values and the timer from the previous game, and calls the first question.
 function startGame(){
-    resetGame();    
+    resetGame();
     gameTimer();
     nextQuestion();
 }
 
 // The game timer will give proper zero padding when the seconds drop to single digits.
 function gameTimer(){
-    
+
     timer = setInterval(function(){
         if (unpickedQuestions.length === 0){
             setTimeout(()=>clearInterval(timer), 1000);
