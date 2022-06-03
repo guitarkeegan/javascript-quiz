@@ -118,7 +118,7 @@ initialsForm.addEventListener("submit", function(event){
         currentUserInitials = currentUserInitials.toUpperCase();
         const playerProfile = {
             initials: currentUserInitials,
-            accuracy: parseFloat((answeredCorrectly/(answeredCorrectly+answeredIncorrectly) * 100).toPrecision(3)),
+            accuracy: parseFloat((answeredCorrectly/(questionsBank.length) * 100).toPrecision(3)),
             score: answeredCorrectly
         }
         allScores.push(playerProfile);
@@ -168,7 +168,8 @@ function startGame(){
 // The game timer will give proper zero padding when the seconds drop to single digits.
 function gameTimer(){
 
-    document.getElementById("timer").innerHTML = "1:59";
+    document.getElementById("timer").innerHTML = "2:00";
+    
     timer = setInterval(function(){
         if (unpickedQuestions.length === 0){
             setTimeout(()=>clearInterval(timer), 1000);
@@ -258,7 +259,7 @@ function endGame(){
 }
 // TODO: Reset Game
 function resetGame(){ 
-    timerSecCounter = 59;
+    timerSecCounter = 60;
     totalSec = 120;
     min = 1;
     zeroPad = "";
