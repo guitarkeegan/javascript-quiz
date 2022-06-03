@@ -168,6 +168,7 @@ function startGame(){
 // The game timer will give proper zero padding when the seconds drop to single digits.
 function gameTimer(){
 
+    document.getElementById("timer").innerHTML = "1:59";
     timer = setInterval(function(){
         if (unpickedQuestions.length === 0){
             setTimeout(()=>clearInterval(timer), 1000);
