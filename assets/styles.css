@@ -1,7 +1,7 @@
 :root {
-    --bg: #DB4D30;
-    --cc: #30DB98;
-    --highlight: #5F3BDB;
+    --bg: rgb(86, 156, 214);
+    --cc: rgb(153, 215, 248);
+    --highlight: rgb(206, 145, 120);
 }
 
 * {
@@ -12,7 +12,7 @@
 
 body {
     font-family: 'Hind Siliguri', sans-serif;
-    background-color: var(--bg)
+    background-color: var(--bg);
 }
 
 main {
@@ -71,7 +71,7 @@ span {
 }
 
 #start-button:hover {
-    background-color: #38FFAF;
+    background-color: var(--highlight);
 }
 
 #start-card {
@@ -83,6 +83,9 @@ span {
     width: 640px;
     padding: 40px 20px 10px;
     border: 5px solid black;
+}
+#start-card li{
+    color: black;
 }
 
 #question-card {
@@ -103,6 +106,7 @@ ol {
     word-wrap: normal;
     font-size: 1.2rem;
     color: black;
+    list-style: none;
 }
 
 ol li {
@@ -129,6 +133,7 @@ ol li:hover {
 #instructions {
     font-size: 16px;
     text-align: center;
+    font-weight: bold;
 }
 
 #question-card.incorrect {
