@@ -8,7 +8,7 @@ To help me study for technical interviews and practice building a quiz game.
 
 This is a quiz app that has been completely built with vanilla javascript and only contains
 front-end code. My goal was to make a quiz app that had a fun look and was easy to understand
-without a lot of instructions. 
+without a lot of instructions. The colors were meant to mirror vs code color themes. 
 
 ### Executing program
 
