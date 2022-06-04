@@ -1,4 +1,4 @@
-// Global variables
+// quiz and user variables
 var chosenAnswer = "";
 var correctAnswer = "";
 let chosenIndex = 0;
@@ -7,9 +7,9 @@ let answeredIncorrectly = 0;
 let allScores = []
 let pickedQuestions = []
 let currentUserInitials = "";
-var timer;
 // timer variables
-let timerSecCounter = 59;
+var timer;
+let timerSecCounter = 60;
 let totalSec = 120;
 let min = Math.ceil(60 / totalSec);
 let zeroPad = "";
@@ -29,11 +29,11 @@ const btn3 = document.getElementById("answer3");
 const btn4 = document.getElementById("answer4");
 const startOl = document.getElementById("top-scores");
 
-
+// questions webscraped from codeexercise.com using bs4. 
 const questionsBank = [
     {
         question: 'When a user views a page containing a JavaScript program, which machine actually executes the script?',
-        A: "The User’s machine running a Web browser",
+        A: "The user’s machine running a Web browser",
         B: 'The Web server',
         C: "A central machine deep within Netscape’s corporate offices",
         D: 'None of the above',
@@ -100,10 +100,10 @@ const questionsBank = [
         D: 'None of the above',
         Ans: 'B'}
     ]
-
+// made a copy of the questions bank after running into issues on resetGame()
 let unpickedQuestions = [...questionsBank];
 
-// listener to start the game
+// listener to start the game and hide the start-card and start-button
 startButton.addEventListener("click", function(){
     startCard.style.setProperty("display", "none");
     startButton.style.setProperty("display", "none");
@@ -111,6 +111,7 @@ startButton.addEventListener("click", function(){
     startGame();
 });
 // listener to submit initials, log score to local storage, and display the start menu again
+// will throw an alert if initials is left black
 initialsForm.addEventListener("submit", function(event){
     event.preventDefault();
     currentUserInitials = formInput.value;
@@ -165,7 +166,9 @@ function startGame(){
     nextQuestion();
 }
 
-// The game timer will give proper zero padding when the seconds drop to single digits.
+// The game timer will give proper zero padding when the seconds drop to single digits. 
+// It also accounts for the senario of haveing a -10 second deduction move seconds into a negative number
+// lastly, it provides user feedback if something fails
 function gameTimer(){
 
     document.getElementById("timer").innerHTML = "2:00";
@@ -200,7 +203,7 @@ function gameTimer(){
     
 }
 
-// check if answer was correct. It is passed the user's selected answer.
+// check if answer was correct, then call the feedback function.
 function checkAnswer(chosenAnswer) {
     if (chosenAnswer === correctAnswer){
         answeredCorrectly += 1;
@@ -236,7 +239,7 @@ function feedback(correct){
     removeQuestion();
     nextQuestion();
 }
-// TODO: call next function
+// call the next question and check to see if they have all been answered
 function nextQuestion(){
     if (unpickedQuestions.length === 0){
         setTimeout(endGame, 501); 
@@ -252,12 +255,12 @@ function nextQuestion(){
     }
 }
 
-// TODO: End of game function
+// hide the question-card and display the initials-card
 function endGame(){
     questionCard.style.setProperty("display", "none");
     initialsCard.style.setProperty("display", "block");
 }
-// TODO: Reset Game
+// Reset the game and timer variables
 function resetGame(){ 
     timerSecCounter = 60;
     totalSec = 120;
@@ -278,7 +281,7 @@ function resetGame(){
           }
     }
 }
-
+// get, sort and display all of the locally stored scores
 function getScores(){
     if (allScores.length > 0){
         allScores.sort((a, b) => (a.score > b.score) ? 1 : (a.score < b.score) ? -1 : 0);
@@ -310,6 +313,6 @@ function loadLocally(){
         return;
     }
 }
-
+// called before game starts
 loadLocally();
 getScores();

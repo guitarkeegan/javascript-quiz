@@ -184,9 +184,7 @@ ol li:hover {
         margin: 0 40px 0 0;
         font-size: 2rem;
     }
-    ol li {
-        padding-left: 10px;
-    }
+    /* fix for showing selected on mobile bug */
     ol li:hover {
         border-color: var(--bg);
     }
@@ -201,9 +199,6 @@ ol li:hover {
         height: auto;
         padding-bottom: 30px;
 }
-    ol li {
-        padding-left: 10px;
-    }
 }
 
 @media screen and (max-width: 480px){
@@ -215,12 +210,4 @@ ol li:hover {
     h1{
         font-size: 1.5rem;
     }
-    ol {
-        list-style: none;
-        
-    }
-    ol li {
-        padding-left: 10px;
-    }
-
 }
